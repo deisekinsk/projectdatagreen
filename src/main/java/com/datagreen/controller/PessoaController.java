@@ -1,5 +1,6 @@
 package com.datagreen.controller;
 
+import com.datagreen.dto.PessoaDTO;
 import com.datagreen.model.Pessoa;
 import com.datagreen.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,20 +27,20 @@ public class PessoaController {
     }
 
     @PostMapping
-    public String inserirPessoa(){
+    public String inserirPessoa(@RequestBody PessoaDTO pessoaDTO){
+        pessoaService.inserirPessoa(pessoaDTO);
         return "inserir";
     }
 
     @PutMapping
-    public String atualizarPessoa(){
+    public String atualizarPessoa(@RequestBody PessoaDTO pessoaDTO){
+        pessoaService.atualizarPessoa(pessoaDTO);
         return "atualizar";
     }
 
     @DeleteMapping
-    public String deletarPessoa(){
+    public String deletarPessoa(@RequestParam Long pessoaId){
+        pessoaService.deletaPessoa(pessoaId);
         return "delete";
     }
-
-
-
 }

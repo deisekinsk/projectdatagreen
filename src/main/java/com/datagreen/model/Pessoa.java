@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Pessoa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
     private Long id;
     @Column(name = "first_name")
