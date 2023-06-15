@@ -4,6 +4,8 @@ import com.datagreen.dto.PessoaDTO;
 import com.datagreen.model.Pessoa;
 import com.datagreen.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,31 +18,52 @@ public class PessoaController {
     private PessoaService pessoaService;
 
     @GetMapping
-    public Pessoa buscarPessoa(@RequestParam Long idPessoa){
-        return pessoaService.buscarPessoa(idPessoa);
-
+    public ResponseEntity<Pessoa> buscarPessoa(@RequestParam Long idPessoa){
+        try{
+            return new ResponseEntity<Pessoa>(pessoaService.buscarPessoa(idPessoa),HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/list")
-    public List listarPessoa(){
-        return pessoaService.listarPessoas();
+    public ResponseEntity<List<Pessoa>> listarPessoa(){
+        try{
+            return new ResponseEntity<List<Pessoa>>(pessoaService.listarPessoas(),
+                    HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping
-    public String inserirPessoa(@RequestBody PessoaDTO pessoaDTO){
-        pessoaService.inserirPessoa(pessoaDTO);
-        return "inserir";
+    public ResponseEntity<Pessoa> inserirPessoa(@RequestBody PessoaDTO pessoaDTO){
+        try{
+
+            return new ResponseEntity<Pessoa>(pessoaService.inserirPessoa(pessoaDTO),HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping
-    public String atualizarPessoa(@RequestBody PessoaDTO pessoaDTO){
-        pessoaService.atualizarPessoa(pessoaDTO);
-        return "atualizar";
+    public ResponseEntity<Pessoa> atualizarPessoa(@RequestBody PessoaDTO pessoaDTO){
+        try{
+            return new ResponseEntity<Pessoa>(pessoaService.atualizarPessoa(pessoaDTO),HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping
-    public String deletarPessoa(@RequestParam Long pessoaId){
-        pessoaService.deletaPessoa(pessoaId);
-        return "delete";
+    public ResponseEntity<HttpStatus> deletarPessoa(@RequestParam Long pessoaId){
+
+        try {
+            pessoaService.deletaPessoa(pessoaId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
     }
 }

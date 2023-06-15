@@ -15,7 +15,7 @@ public class PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    public List listarPessoas(){
+    public List<Pessoa> listarPessoas(){
         return pessoaRepository.findAll();    }
 
 
@@ -44,8 +44,14 @@ public class PessoaService {
         return pessoaRepository.save(p);
     }
 
-    public void deletaPessoa(Long pessoaId){
-        pessoaRepository.deleteById(pessoaId);
+    public void deletaPessoa(Long pessoaId) throws Exception {
+        Optional <Pessoa> op = pessoaRepository.findById(pessoaId);
+        //Optional notNull
+        if(op.isPresent()){
+            pessoaRepository.deleteById(pessoaId);
+        }else{
+            throw new Exception();
+        };
     }
 
 }
