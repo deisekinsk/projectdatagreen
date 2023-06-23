@@ -1,6 +1,5 @@
 package com.datagreen.controller;
 
-import com.datagreen.model.Pessoa;
 import com.datagreen.model.Produto;
 import com.datagreen.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
