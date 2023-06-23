@@ -9,13 +9,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-//não retorna vazio json
-public class PessoaDTO {
+public class ProdutoDTO {
 
     private Long id;
-    private String firsName;
-    private String lastName;
-    private String email;
+    private String productName;
+    private Float price;
+    private Long stock;
+
 
 
 }

@@ -39,7 +39,6 @@ public class PessoaController {
     @PostMapping
     public ResponseEntity<Pessoa> inserirPessoa(@RequestBody PessoaDTO pessoaDTO){
         try{
-
             return new ResponseEntity<Pessoa>(pessoaService.inserirPessoa(pessoaDTO),HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

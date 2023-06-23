@@ -18,7 +18,7 @@ public class PessoaService {
     public List<Pessoa> listarPessoas(){
         return pessoaRepository.findAll();    }
 
-
+    //Optopnal check whether a variable has null value or not.
     public Pessoa buscarPessoa(Long pessoaId){
          Optional <Pessoa> op = pessoaRepository.findById(pessoaId);
          return op.get();
