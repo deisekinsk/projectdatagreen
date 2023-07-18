@@ -12,6 +12,8 @@ import java.util.Optional;
 @Service
 public class PessoaService {
 
+    //Handler Exception no Service | API
+    //Exceção de acordo com contexto
     @Autowired
     private PessoaRepository pessoaRepository;
 
@@ -29,14 +31,14 @@ public class PessoaService {
         return pessoaRepository.save(p);
     }
 
-    public Pessoa atualizarPessoa(Long pessoaId, PessoaDTO pessoaDTO) {
-        Pessoa p = buscarPessoa(pessoaId);
-        convertePessoaDTO(pessoaDTO);
-        return pessoaRepository.save(p);
+    public Pessoa atualizarPessoa(PessoaDTO pessoaDTO) {
+        Pessoa p = buscarPessoa(pessoaDTO.getId());
+        return pessoaRepository.save(convertePessoaDTO(pessoaDTO));
     }
 
     private Pessoa convertePessoaDTO(PessoaDTO pessoaDTO) {
         Pessoa p = new Pessoa();
+        p.setId(pessoaDTO.getId());
         p.setEmail(pessoaDTO.getEmail());
         p.setFirsName(pessoaDTO.getFirsName());
         p.setLastName(pessoaDTO.getLastName());

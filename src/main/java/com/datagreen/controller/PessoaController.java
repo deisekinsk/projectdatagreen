@@ -46,12 +46,10 @@ public class PessoaController {
     }
 
     //atualiza apenas os campos não nulos
-    @PutMapping("/{pessoaId}")
-    public ResponseEntity<Pessoa> atualizarPessoa(@PathVariable Long pessoaId,
-                                                  @RequestBody PessoaDTO pessoaDTO){
+    @PutMapping
+    public ResponseEntity<Pessoa> atualizarPessoa(@RequestBody PessoaDTO pessoaDTO){
         try{
-            return new ResponseEntity<Pessoa>(pessoaService.atualizarPessoa(pessoaId,
-                    pessoaDTO),
+            return new ResponseEntity<Pessoa>(pessoaService.atualizarPessoa(pessoaDTO),
                     HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
