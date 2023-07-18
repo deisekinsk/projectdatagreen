@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/produto")
 public class ProdutoController {
@@ -18,9 +20,19 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @GetMapping
-    public ResponseEntity<Produto> buscarProduto(@RequestParam Long idProduto){
+    public ResponseEntity<Produto> buscarProduto(@RequestParam Long produtoId){
         try{
-            return new ResponseEntity<Produto>(produtoService.buscarProduto(idProduto),
+            return new ResponseEntity<Produto>(produtoService.buscarProduto(produtoId),
+                    HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<Produto>> listarProduto(){
+        try{
+            return new ResponseEntity<List<Produto>>(produtoService.listarProduto(),
                     HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

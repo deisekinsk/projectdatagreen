@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@Data
+@Data //Gera getters e Setters
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

@@ -24,25 +24,25 @@ public class PessoaService {
          return op.get();
     }
 
-    public Pessoa inserirPessoa(PessoaDTO pessoaDTO){
-        Pessoa p  = new Pessoa();
+    public Pessoa inserirPessoa(PessoaDTO pessoaDTO) {
+        Pessoa p = convertePessoaDTO(pessoaDTO);
+        return pessoaRepository.save(p);
+    }
+
+    public Pessoa atualizarPessoa(Long pessoaId, PessoaDTO pessoaDTO) {
+        Pessoa p = buscarPessoa(pessoaId);
+        convertePessoaDTO(pessoaDTO);
+        return pessoaRepository.save(p);
+    }
+
+    private Pessoa convertePessoaDTO(PessoaDTO pessoaDTO) {
+        Pessoa p = new Pessoa();
         p.setEmail(pessoaDTO.getEmail());
         p.setFirsName(pessoaDTO.getFirsName());
         p.setLastName(pessoaDTO.getLastName());
-
-        return pessoaRepository.save(p);
-        //converte para a entidade de modelo do banco
+        return p;
     }
 
-    public Pessoa atualizarPessoa(PessoaDTO pessoaDTO){
-        Pessoa p  = new Pessoa();
-        p.setEmail(pessoaDTO.getEmail());
-        p.setFirsName(pessoaDTO.getFirsName());
-        p.setLastName(pessoaDTO.getLastName());
-        p.setId(pessoaDTO.getId());
-
-        return pessoaRepository.save(p);
-    }
 
     public void deletaPessoa(Long pessoaId) throws Exception {
         Optional <Pessoa> op = pessoaRepository.findById(pessoaId);
