@@ -22,8 +22,12 @@ public class PessoaService {
 
     //Optopnal check whether a variable has null value or not.
     public Pessoa buscarPessoa(Long pessoaId){
-         Optional <Pessoa> op = pessoaRepository.findById(pessoaId);
-         return op.get();
+        try{
+            Optional <Pessoa> op = pessoaRepository.findById(pessoaId);
+            return op.get();
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
     public Pessoa inserirPessoa(PessoaDTO pessoaDTO) {
