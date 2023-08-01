@@ -3,6 +3,7 @@ package com.datagreen.controller;
 import com.datagreen.dto.PessoaDTO;
 import com.datagreen.model.Pessoa;
 import com.datagreen.service.PessoaService;
+import com.datagreen.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,8 @@ public class PessoaController {
     private PessoaService pessoaService;
 
     @GetMapping
-    public ResponseEntity<Pessoa> buscarPessoa(@RequestParam Long idPessoa){
-            return new ResponseEntity<Pessoa>(pessoaService.buscarPessoa(idPessoa),HttpStatus.OK);
+    public ResponseEntity<Pessoa> buscarPessoa(@RequestParam Long pessoaId){
+            return new ResponseEntity<Pessoa>(pessoaService.buscarPessoa(pessoaId),HttpStatus.OK);
     }
 
     @GetMapping("/list")
@@ -41,12 +42,17 @@ public class PessoaController {
     }
 
     @DeleteMapping
-    public ResponseEntity<HttpStatus> deletarPessoa(@RequestParam Long pessoaId){
-        try {
+    public ResponseEntity<HttpStatus> deletarPessoa(@RequestParam Long pessoaId)
+            throws Exception {
+//        try {
+//            pessoaService.deletaPessoa(pessoaId);
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//        return new ResponseEntity<>(HttpStatus.OK);
+        if(pessoaId!=null){
             pessoaService.deletaPessoa(pessoaId);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }throw new NotFoundException("Test");
     }
 }
