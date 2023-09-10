@@ -26,7 +26,7 @@ public class PessoaTest {
         // Criando ium mock
         PessoaRepository pessoaRepositoryMock = Mockito.mock(PessoaRepository.class);
 
-        // Crie uma lista de pessoas para retornar quando o método findAll() for chamado no mock
+        // lista de pessoas para retornar quando o método findAll() for chamado no mock
         List<Pessoa> listaDePessoas = new ArrayList<>();
 
         // mock para não acessar BD diretamente
