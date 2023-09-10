@@ -18,6 +18,10 @@ public class PessoaController {
     @Autowired
     private PessoaService pessoaService;
 
+    public PessoaController(PessoaService pessoaService) {
+        this.pessoaService = pessoaService;
+    }
+
     @GetMapping
     public ResponseEntity<Pessoa> buscarPessoa(@RequestParam Long pessoaId){
             return new ResponseEntity<Pessoa>(pessoaService.buscarPessoa(pessoaId),HttpStatus.OK);

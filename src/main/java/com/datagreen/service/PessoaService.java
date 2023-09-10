@@ -21,8 +21,13 @@ public class PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
+    public PessoaService(PessoaRepository pessoaRepository){
+        this.pessoaRepository = pessoaRepository;
+    }
+
     public List<Pessoa> listarPessoas(){
-        return pessoaRepository.findAll();    }
+        return pessoaRepository.findAll();
+    }
 
     //Optopnal check whether a variable has null value or not.
     public Pessoa buscarPessoa(Long pessoaId) {
@@ -32,7 +37,7 @@ public class PessoaService {
 //        }catch (Exception e){
 //            throw new RuntimeException(e);
 //        }
-        if(TRUE) {
+        if(pessoaId!=null) {
             Optional<Pessoa> op = pessoaRepository.findById(pessoaId);
             return op.get();
         }else{
